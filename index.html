@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Goh Tech | Digital Transformation for Local Businesses</title>
+<meta name="description" content="Goh Tech builds websites, mobile apps, POS systems and custom software that move local businesses online.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+Ethiopic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+  :root{
+    --navy:#101826;
+    --navy-2:#182234;
+    --cream:#F7F5F1;
+    --gold:#E0A458;
+    --gold-dim: rgba(224,164,88,0.15);
+    --teal:#2C6E6B;
+    --ink:#0C1219;
+    --paper:#ffffff;
+    --muted:#5B6472;
+    --line: rgba(16,24,38,0.09);
+    --radius: 14px;
+    --max: 1180px;
+    font-size: 16px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  [lang-am]{ font-family:'Noto Sans Ethiopic','Inter',sans-serif; }
+  html[data-lang="am"] [data-en], html[data-lang="en"] [data-am]{ display:none; }
+  html[data-lang="am"] [data-am], html[data-lang="en"] [data-en]{ display:inline; }
+  html[data-lang="am"] .am-block{ display:block !important; }
+  html[data-lang="en"] .am-block{ display:none !important; }
+  html[data-lang="am"] body{ font-family:'Noto Sans Ethiopic','Inter',sans-serif; }
+
+  h1,h2,h3,h4{
+    font-family:'Space Grotesk',sans-serif;
+    color:var(--navy);
+    line-height:1.15;
+    font-weight:700;
+    letter-spacing:-0.01em;
+  }
+  a{ text-decoration:none; color:inherit; }
+  ul{ list-style:none; }
+  img{ max-width:100%; display:block; }
+
+  .container{ width:100%; max-width:var(--max); margin:0 auto; padding:0 28px; }
+  section{ padding:112px 0; position:relative; }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:0.78rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--teal); margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:''; width:20px; height:1px; background:var(--teal);
+  }
+
+  /* Buttons */
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:10px;
+    padding:14px 30px; border-radius:9px; font-weight:600; font-size:0.95rem;
+    cursor:pointer; transition:all .25s ease; border:1.5px solid transparent;
+    font-family:'Inter',sans-serif;
+  }
+  .btn-primary{ background:var(--navy); color:var(--cream); }
+  .btn-primary:hover{ background:var(--ink); transform:translateY(-2px); box-shadow:0 10px 24px rgba(16,24,38,0.25); }
+  .btn-outline{ background:transparent; color:var(--navy); border-color:var(--line); }
+  .btn-outline:hover{ border-color:var(--navy); transform:translateY(-2px); }
+  .btn-gold{ background:var(--gold); color:var(--ink); }
+  .btn-gold:hover{ filter:brightness(1.06); transform:translateY(-2px); box-shadow:0 10px 24px rgba(224,164,88,0.35); }
+
+  /* Nav */
+  .navbar{
+    position:fixed; top:0; left:0; width:100%; z-index:1000;
+    padding:22px 0; transition:all .3s ease;
+    background:transparent;
+  }
+  .navbar.scrolled{
+    padding:14px 0; background:rgba(247,245,241,0.86);
+    backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .navbar .container{ display:flex; align-items:center; justify-content:space-between; }
+  .logo{ display:flex; align-items:center; gap:10px; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.25rem; color:var(--navy); }
+  .logo-mark{
+    width:34px; height:34px; border-radius:8px;
+    background:linear-gradient(135deg, var(--navy) 55%, var(--gold) 100%);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--cream); font-size:0.95rem; font-weight:700;
+  }
+  .logo .am{ font-family:'Noto Sans Ethiopic','Space Grotesk',sans-serif; color:var(--muted); font-size:0.95rem; font-weight:500; margin-left:2px; }
+
+  .nav-links{ display:flex; align-items:center; gap:36px; }
+  .nav-link{ font-size:0.92rem; font-weight:500; color:var(--navy); position:relative; padding:4px 0; }
+  .nav-link::after{
+    content:''; position:absolute; left:0; bottom:-2px; width:0; height:2px; background:var(--gold);
+    transition:width .25s ease;
+  }
+  .nav-link:hover::after{ width:100%; }
+  .nav-right{ display:flex; align-items:center; gap:14px; }
+
+  .lang-toggle{
+    display:flex; border:1.5px solid var(--line); border-radius:8px; overflow:hidden;
+    font-size:0.78rem; font-weight:600; font-family:'Inter',sans-serif;
+  }
+  .lang-toggle button{
+    padding:7px 12px; background:transparent; border:none; cursor:pointer; color:var(--muted);
+    transition:all .2s ease;
+  }
+  .lang-toggle button.active{ background:var(--navy); color:var(--cream); }
+
+  .hamburger{ display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:6px; }
+  .hamburger span{ width:22px; height:2px; background:var(--navy); transition:all .25s ease; }
+  .hamburger.active span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  .hamburger.active span:nth-child(2){ opacity:0; }
+  .hamburger.active span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+
+  /* HERO */
+  .hero{
+    padding:200px 0 120px;
+    position:relative;
+    background:var(--navy);
+    color:var(--cream);
+    overflow:hidden;
+  }
+  .hero::before{
+    /* dawn line — the one signature accent */
+    content:'';
+    position:absolute; left:0; right:0; top:0; height:2px;
+    background:linear-gradient(90deg, var(--navy) 0%, var(--gold) 55%, var(--teal) 100%);
+    opacity:0.9;
+  }
+  .hero::after{
+    content:'';
+    position:absolute; bottom:-40%; left:50%; transform:translateX(-50%);
+    width:120%; height:70%;
+    background: radial-gradient(ellipse at center, rgba(224,164,88,0.10) 0%, rgba(16,24,38,0) 70%);
+    pointer-events:none;
+  }
+  .hero-inner{ position:relative; z-index:2; max-width:760px; }
+  .hero h1{
+    color:var(--cream); font-size:clamp(2.4rem, 5vw, 3.8rem); margin-bottom:24px;
+  }
+  .hero h1 .accent{ color:var(--gold); }
+  .hero p.lead{
+    font-size:1.15rem; color:rgba(247,245,241,0.72); max-width:560px; margin-bottom:40px;
+  }
+  .hero-cta{ display:flex; gap:16px; flex-wrap:wrap; margin-bottom:64px; }
+  .hero .btn-outline{ color:var(--cream); border-color:rgba(247,245,241,0.25); }
+  .hero .btn-outline:hover{ border-color:var(--cream); }
+
+  .hero-stats{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:0;
+    border-top:1px solid rgba(247,245,241,0.14);
+    padding-top:32px; max-width:640px;
+  }
+  .hero-stats div{ padding-right:24px; }
+  .hero-stats .num{ font-family:'Space Grotesk',sans-serif; font-size:1.9rem; font-weight:700; color:var(--gold); }
+  .hero-stats .label{ font-size:0.82rem; color:rgba(247,245,241,0.6); margin-top:4px; }
+
+  /* TRANSFORMATION / SERVICES */
+  #services{ background:var(--cream); }
+  .section-head{ max-width:640px; margin-bottom:64px; }
+  .section-head h2{ font-size:clamp(1.9rem,3.4vw,2.6rem); margin-bottom:16px; }
+  .section-head p{ color:var(--muted); font-size:1.05rem; }
+
+  .transform-row{
+    display:grid; grid-template-columns:1fr auto 1fr; gap:0; align-items:center;
+    border:1px solid var(--line); border-radius:var(--radius);
+    background:var(--paper); margin-bottom:20px; overflow:hidden;
+  }
+  .transform-row:hover{ border-color: rgba(224,164,88,0.5); box-shadow:0 12px 30px rgba(16,24,38,0.06); }
+  .t-before, .t-after{ padding:30px 34px; }
+  .t-before{ color:var(--muted); }
+  .t-before .tag{ font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; font-weight:600; color:#9AA1AB; margin-bottom:8px; display:block; }
+  .t-after .tag{ font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; font-weight:600; color:var(--teal); margin-bottom:8px; display:block; }
+  .t-before p, .t-after p{ font-size:1.02rem; font-weight:500; line-height:1.45; }
+  .t-after{ background: linear-gradient(180deg, rgba(224,164,88,0.05), transparent); }
+  .t-after p{ color:var(--navy); }
+  .t-arrow{
+    display:flex; align-items:center; justify-content:center;
+    width:52px; height:52px; border-radius:50%;
+    background:var(--navy); color:var(--gold);
+    font-size:1rem; margin:0 auto;
+  }
+  .t-icon-row{ display:flex; align-items:center; gap:14px; padding:0 8px; }
+
+  @media (max-width:760px){
+    .transform-row{ grid-template-columns:1fr; }
+    .t-arrow{ transform:rotate(90deg); margin:0 auto; }
+    .t-before, .t-after{ padding:22px 24px; }
+  }
+
+  /* WHY / APPROACH */
+  #approach{ background:var(--navy-2); color:var(--cream); }
+  #approach .section-head p{ color:rgba(247,245,241,0.65); }
+  #approach .section-head h2{ color:var(--cream); }
+  .approach-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+  .approach-card{
+    background:rgba(247,245,241,0.04); border:1px solid rgba(247,245,241,0.1);
+    border-radius:var(--radius); padding:32px 28px;
+    transition:all .3s ease;
+  }
+  .approach-card:hover{ background:rgba(247,245,241,0.07); transform:translateY(-6px); border-color:rgba(224,164,88,0.35); }
+  .approach-card i{ font-size:1.4rem; color:var(--gold); margin-bottom:18px; display:block; }
+  .approach-card h3{ color:var(--cream); font-size:1.15rem; margin-bottom:10px; }
+  .approach-card p{ color:rgba(247,245,241,0.6); font-size:0.95rem; }
+
+  @media(max-width:900px){ .approach-grid{ grid-template-columns:1fr; } }
+
+  /* PROCESS */
+  #process{ background:var(--cream); }
+  .process-list{ display:flex; flex-direction:column; }
+  .process-item{
+    display:grid; grid-template-columns:80px 1fr; gap:28px;
+    padding:32px 0; border-bottom:1px solid var(--line);
+  }
+  .process-item:first-child{ border-top:1px solid var(--line); }
+  .process-num{ font-family:'Space Grotesk',sans-serif; font-size:1.6rem; font-weight:700; color:var(--gold); }
+  .process-body h3{ font-size:1.2rem; margin-bottom:8px; }
+  .process-body p{ color:var(--muted); max-width:640px; }
+
+  /* WORK */
+  #work{ background:var(--cream); }
+  .work-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
+  .work-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
+    padding:34px; transition:all .3s ease; display:flex; flex-direction:column; height:100%;
+  }
+  .work-card:hover{ transform:translateY(-6px); box-shadow:0 16px 34px rgba(16,24,38,0.08); border-color:rgba(224,164,88,0.4); }
+  .work-tags{ display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+  .work-tags .tag{
+    font-size:0.72rem; font-weight:600; padding:5px 10px; border-radius:6px;
+    background:var(--gold-dim); color:#9c6a1f;
+  }
+  .work-card h3{ font-size:1.25rem; margin-bottom:10px; }
+  .work-card p{ color:var(--muted); font-size:0.95rem; margin-bottom:20px; flex-grow:1; }
+  .work-link{ font-weight:600; font-size:0.92rem; color:var(--navy); display:inline-flex; align-items:center; gap:8px; }
+  .work-link i{ font-size:0.8rem; transition:transform .2s ease; }
+  .work-link:hover i{ transform:translateX(4px); }
+  .work-empty{
+    grid-column:1/-1; text-align:center; padding:56px 24px;
+    border:1.5px dashed var(--line); border-radius:var(--radius); color:var(--muted);
+  }
+  .work-empty i{ font-size:1.6rem; color:var(--gold); margin-bottom:14px; display:block; }
+
+  @media(max-width:760px){ .work-grid{ grid-template-columns:1fr; } }
+
+  /* CONTACT */
+  #contact{ background:var(--navy); color:var(--cream); }
+  .contact-wrap{
+    display:grid; grid-template-columns:0.9fr 1.1fr; gap:0;
+    border-radius:var(--radius); overflow:hidden;
+    background:var(--navy-2); border:1px solid rgba(247,245,241,0.1);
+  }
+  .contact-info{ padding:52px 44px; }
+  .contact-info h3{ color:var(--cream); font-size:1.6rem; margin-bottom:14px; }
+  .contact-info > p{ color:rgba(247,245,241,0.65); margin-bottom:36px; }
+  .info-item{ display:flex; gap:16px; margin-bottom:26px; align-items:flex-start; }
+  .info-icon{
+    width:38px; height:38px; border-radius:9px; background:rgba(224,164,88,0.14);
+    color:var(--gold); display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .info-text h4{ color:var(--cream); font-size:0.95rem; margin-bottom:3px; }
+  .info-text span{ color:rgba(247,245,241,0.6); font-size:0.92rem; }
+
+  .contact-form-container{ padding:52px 44px; background:rgba(247,245,241,0.03); }
+  .contact-form{ display:flex; flex-direction:column; gap:18px; }
+  .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .form-group{ display:flex; flex-direction:column; gap:8px; }
+  .form-group label{ font-size:0.85rem; color:rgba(247,245,241,0.7); font-weight:500; }
+  .form-group input, .form-group textarea{
+    background:rgba(247,245,241,0.06); border:1px solid rgba(247,245,241,0.14);
+    border-radius:8px; padding:12px 14px; color:var(--cream); font-family:'Inter',sans-serif; font-size:0.95rem;
+    transition:border-color .2s ease;
+  }
+  .form-group input::placeholder, .form-group textarea::placeholder{ color:rgba(247,245,241,0.35); }
+  .form-group input:focus, .form-group textarea:focus{ outline:none; border-color:var(--gold); }
+  .form-group textarea{ resize:vertical; min-height:110px; }
+  .success-msg{
+    display:none; background:rgba(44,110,107,0.18); border:1px solid rgba(44,110,107,0.5);
+    color:#bfe3e0; padding:16px 18px; border-radius:9px; margin-bottom:18px; font-size:0.92rem;
+  }
+  .success-msg i{ margin-right:8px; color:var(--teal); }
+
+  @media(max-width:820px){
+    .contact-wrap{ grid-template-columns:1fr; }
+    .form-row{ grid-template-columns:1fr; }
+  }
+
+  /* FOOTER */
+  .footer{ background:var(--ink); color:rgba(247,245,241,0.55); padding:64px 0 28px; }
+  .footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:48px; margin-bottom:48px; }
+  .footer-brand p{ margin:16px 0 20px; font-size:0.92rem; max-width:340px; }
+  .footer-brand .logo{ color:var(--cream); }
+  .social-links{ display:flex; gap:12px; }
+  .social-link{
+    width:36px; height:36px; border-radius:8px; background:rgba(247,245,241,0.06);
+    display:flex; align-items:center; justify-content:center; color:rgba(247,245,241,0.7);
+    transition:all .2s ease;
+  }
+  .social-link:hover{ background:var(--gold); color:var(--ink); }
+  .footer-links h4{ color:var(--cream); font-size:0.95rem; margin-bottom:18px; }
+  .footer-links ul li{ margin-bottom:11px; }
+  .footer-links a{ font-size:0.92rem; transition:color .2s ease; }
+  .footer-links a:hover{ color:var(--gold); }
+  .footer-bottom{ border-top:1px solid rgba(247,245,241,0.08); padding-top:24px; font-size:0.85rem; text-align:center; }
+
+  @media(max-width:760px){ .footer-grid{ grid-template-columns:1fr; gap:32px; } }
+
+  /* Reveal animation */
+  .reveal{ opacity:0; transform:translateY(24px); transition:all .7s cubic-bezier(.2,.7,.3,1); }
+  .reveal.active{ opacity:1; transform:translateY(0); }
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+    *{ scroll-behavior:auto !important; }
+  }
+
+  /* Mobile nav */
+  @media(max-width:900px){
+    .nav-links{
+      position:fixed; top:0; right:-100%; width:78%; max-width:320px; height:100vh;
+      background:var(--navy); flex-direction:column; align-items:flex-start;
+      padding:100px 32px 32px; gap:26px; transition:right .35s ease; z-index:999;
+    }
+    .nav-links.active{ right:0; }
+    .nav-links .nav-link{ color:var(--cream); font-size:1.05rem; }
+    .hamburger{ display:flex; }
+    .hero-stats{ grid-template-columns:1fr; gap:20px; }
+    .approach-grid{ }
+  }
+
+  :focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <a href="#home" class="logo">
+      <span class="logo-mark">ጎ</span>
+      Goh Tech <span class="am">| ጎህ ቴክ</span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#services" class="nav-link"><span data-en>Services</span><span data-am>አገልግሎቶች</span></a></li>
+      <li><a href="#approach" class="nav-link"><span data-en>Why Us</span><span data-am>ለምን እኛ</span></a></li>
+      <li><a href="#process" class="nav-link"><span data-en>Process</span><span data-am>ሂደት</span></a></li>
+      <li><a href="#work" class="nav-link"><span data-en>Work</span><span data-am>ስራዎቻችን</span></a></li>
+      <li><a href="#contact" class="nav-link btn btn-primary" style="padding:10px 22px;"><span data-en>Start a Project</span><span data-am>ፕሮጀክት ጀምር</span></a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang-toggle" id="langToggle">
+        <button data-set-lang="en" class="active">EN</button>
+        <button data-set-lang="am">አማ</button>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="container hero-inner">
+    <div class="eyebrow" style="color:var(--gold);"><span data-en>Software for Ethiopian businesses</span><span data-am>ለኢትዮጵያ ንግዶች የተዘጋጀ ሶፍትዌር</span></div>
+    <h1>
+      <span data-en>Take your business from <span class="accent">paper ledgers</span> to <span class="accent">real systems</span>.</span>
+      <span data-am>ንግድዎን ከ<span class="accent">ወረቀት መዝገብ</span> ወደ <span class="accent">ትክክለኛ ሲስተም</span> እናሸጋግራለን።</span>
+    </h1>
+    <p class="lead">
+      <span data-en>Goh Tech builds the websites, apps, and back-office systems that let local businesses run online, sell more, and stop losing track of what's happening in the shop.</span>
+      <span data-am>ጎህ ቴክ የአካባቢ ንግዶች በመስመር ላይ እንዲሠሩ፣ ሽያጭ እንዲያሳድጉ እና በድርጅታቸው ውስጥ የሚከናወነውን ነገር በትክክል እንዲከታተሉ የሚያስችላቸውን ድህረ ገጾች፣ መተግበሪያዎች እና የውስጥ ስርዓቶች እንገነባለን።</span>
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-gold"><span data-en>Start a Project</span><span data-am>ፕሮጀክት ጀምር</span> <i class="fa-solid fa-arrow-right"></i></a>
+      <a href="#services" class="btn btn-outline"><span data-en>See Services</span><span data-am>አገልግሎቶችን ይመልከቱ</span></a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="num">4</div>
+        <div class="label"><span data-en>Core services, one team</span><span data-am>4 ዋና አገልግሎቶች፣ አንድ ቡድን</span></div>
+      </div>
+      <div>
+        <div class="num">100%</div>
+        <div class="label"><span data-en>Built for local business realities</span><span data-am>ለአካባቢ ንግድ እውነታ የተገነባ</span></div>
+      </div>
+      <div>
+        <div class="num">2</div>
+        <div class="label"><span data-en>Founders, hands-on every project</span><span data-am>መሥራቾች፣ በእያንዳንዱ ፕሮጀክት ውስጥ ተሳታፊ</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES / TRANSFORMATION -->
+<section id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span data-en>What we build</span><span data-am>የምንገነባው</span></div>
+      <h2><span data-en>Four ways we move you forward</span><span data-am>ወደፊት የምናራምድባቸው አራት መንገዶች</span></h2>
+      <p><span data-en>Every service starts with where your business is today and ends with a system that actually gets used.</span><span data-am>እያንዳንዱ አገልግሎት የሚጀምረው ንግድዎ ዛሬ ካለበት ደረጃ ሲሆን በትክክል ጥቅም ላይ በሚውል ስርዓት ያበቃል።</span></p>
+    </div>
+
+    <div class="transform-row reveal">
+      <div class="t-before">
+        <span class="tag" data-en>Before</span><span class="tag" data-am>ቀድሞ</span>
+        <p><span data-en>No website. Customers can only find you if they already know you.</span><span data-am>ድህረ ገጽ የለም። ደንበኞች ስለ እርስዎ አስቀድመው ካወቁ ብቻ ያገኙዎታል።</span></p>
+      </div>
+      <div class="t-icon-row"><div class="t-arrow"><i class="fa-solid fa-arrow-right"></i></div></div>
+      <div class="t-after">
+        <span class="tag" data-en>Websites &amp; E-commerce</span><span class="tag" data-am>ድህረ ገጽ እና ኢ-ኮሜርስ</span>
+        <p><span data-en>A fast, mobile-ready website with online ordering or booking, so customers can find and buy from you any time.</span><span data-am>ደንበኞች በማንኛውም ሰዓት ሊያገኙዎ እና ሊገዙ የሚችሉበት ፈጣን፣ ለሞባይል ተስማሚ ድህረ ገጽ ከመስመር ላይ ትዕዛዝ ወይም ቦታ ማስያዝ ጋር።</span></p>
+      </div>
+    </div>
+
+    <div class="transform-row reveal">
+      <div class="t-before">
+        <span class="tag" data-en>Before</span><span class="tag" data-am>ቀድሞ</span>
+        <p><span data-en>Customers can only reach you by walking in or calling during open hours.</span><span data-am>ደንበኞች መደብር ክፍት በሆነ ሰዓት በአካል በመምጣት ወይም በስልክ ብቻ ሊያገኙዎት ይችላሉ።</span></p>
+      </div>
+      <div class="t-icon-row"><div class="t-arrow"><i class="fa-solid fa-arrow-right"></i></div></div>
+      <div class="t-after">
+        <span class="tag" data-en>Mobile Apps</span><span class="tag" data-am>የሞባይል መተግበሪያዎች</span>
+        <p><span data-en>A branded Flutter app for iOS and Android that puts your business in your customers' pocket, with orders, updates, and loyalty built in.</span><span data-am>ትዕዛዞችን፣ ማሳወቂያዎችን እና የደንበኝነት ጥቅማ ጥቅሞችን ያካተተ ንግድዎን በደንበኞችዎ ኪስ ውስጥ የሚያስቀምጥ ለiOS እና Android የተዘጋጀ የFlutter መተግበሪያ።</span></p>
+      </div>
+    </div>
+
+    <div class="transform-row reveal">
+      <div class="t-before">
+        <span class="tag" data-en>Before</span><span class="tag" data-am>ቀድሞ</span>
+        <p><span data-en>Sales are tracked in a notebook. Stock counts are a guess.</span><span data-am>ሽያጭ በማስታወሻ ደብተር ይመዘገባል። የእቃ ክምችት ቁጥር ግምት ብቻ ነው።</span></p>
+      </div>
+      <div class="t-icon-row"><div class="t-arrow"><i class="fa-solid fa-arrow-right"></i></div></div>
+      <div class="t-after">
+        <span class="tag" data-en>POS &amp; Inventory</span><span class="tag" data-am>POS እና የእቃ ክምችት</span>
+        <p><span data-en>A point-of-sale system that records every sale and updates stock automatically, so you always know what's selling and what's running out.</span><span data-am>እያንዳንዱን ሽያጭ የሚመዘግብ እና ክምችትን በራስ-ሰር የሚያዘምን የፍሮች ስርዓት፣ ምን በደንብ እንደሚሸጥ እና ምን እንዳለቀ ሁልጊዜ እንዲያውቁ ያደርግዎታል።</span></p>
+      </div>
+    </div>
+
+    <div class="transform-row reveal">
+      <div class="t-before">
+        <span class="tag" data-en>Before</span><span class="tag" data-am>ቀድሞ</span>
+        <p><span data-en>Staff repeat the same manual steps every day, and mistakes slip through.</span><span data-am>ሰራተኞች በየቀኑ ተመሳሳይ በእጅ የሚደረጉ ስራዎችን ይደግማሉ፣ ስህተቶችም ይፈጠራሉ።</span></p>
+      </div>
+      <div class="t-icon-row"><div class="t-arrow"><i class="fa-solid fa-arrow-right"></i></div></div>
+      <div class="t-after">
+        <span class="tag" data-en>Business Automation</span><span class="tag" data-am>የንግድ አውቶሜሽን</span>
+        <p><span data-en>Custom software built around how your business actually runs — automating reports, approvals, payments, and the repetitive work that eats up your day.</span><span data-am>ንግድዎ በትክክል እንዴት እንደሚሰራ ላይ ተመስርቶ የተገነባ ብጁ ሶፍትዌር — ሪፖርቶችን፣ ማጽደቆችን፣ ክፍያዎችን እና ጊዜዎን የሚወስዱ ተደጋጋሚ ስራዎችን አውቶማት ያደርጋል።</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section id="approach">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span data-en>Why Goh Tech</span><span data-am>ለምን ጎህ ቴክ</span></div>
+      <h2><span data-en>Built for how local businesses actually work</span><span data-am>የአካባቢ ንግዶች በትክክል እንዴት እንደሚሰሩ ታሳቢ ያደረገ</span></h2>
+      <p><span data-en>We're not adapting a template built for another market. Every project starts from your workflow, your customers, and your constraints.</span><span data-am>ለሌላ ገበያ የተዘጋጀ አብነት አናስተካክልም። እያንዳንዱ ፕሮጀክት የሚጀምረው ከእርስዎ የስራ ሂደት፣ ደንበኞችዎ እና ገደቦችዎ ነው።</span></p>
+    </div>
+    <div class="approach-grid">
+      <div class="approach-card reveal">
+        <i class="fa-solid fa-map-location-dot"></i>
+        <h3><span data-en>Built for local realities</span><span data-am>ለአካባቢ እውነታ የተገነባ</span></h3>
+        <p><span data-en>Low bandwidth, mixed-language customers, cash and mobile payments — we design for the conditions your business actually operates in.</span><span data-am>ዝቅተኛ ኢንተርኔት፣ ብዙ ቋንቋ የሚናገሩ ደንበኞች፣ የጥሬ ገንዘብ እና የሞባይል ክፍያዎች — ንግድዎ በትክክል በሚሰራበት ሁኔታ ላይ ተመስርተን እንነድፋለን።</span></p>
+      </div>
+      <div class="approach-card reveal">
+        <i class="fa-solid fa-people-arrows"></i>
+        <h3><span data-en>Two founders, every project</span><span data-am>ሁለት መሥራቾች፣ በእያንዳንዱ ፕሮጀክት</span></h3>
+        <p><span data-en>No account managers passing your project down a chain. You work directly with the people building it, start to finish.</span><span data-am>ፕሮጀክትዎን በሰንሰለት የሚያስተላልፉ የሂሳብ አስተዳዳሪዎች የሉም። ከመጀመሪያ እስከ መጨረሻ ከሚገነቡት ሰዎች ጋር በቀጥታ ይሰራሉ።</span></p>
+      </div>
+      <div class="approach-card reveal">
+        <i class="fa-solid fa-layer-group"></i>
+        <h3><span data-en>One team, every layer</span><span data-am>አንድ ቡድን፣ ሁሉንም ደረጃ</span></h3>
+        <p><span data-en>Website, app, backend, and in-store systems from a single team means everything actually talks to each other.</span><span data-am>ድህረ ገጽ፣ መተግበሪያ፣ የውስጥ ስርዓት እና የመደብር ስርዓቶች ከአንድ ቡድን ስለሚመጡ ሁሉም ነገር በትክክል ይገናኛል።</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span data-en>How we work</span><span data-am>እንዴት እንደምንሰራ</span></div>
+      <h2><span data-en>From first conversation to launch</span><span data-am>ከመጀመሪያ ውይይት እስከ ስራ ማስጀመር</span></h2>
+    </div>
+    <div class="process-list">
+      <div class="process-item reveal">
+        <div class="process-num">01</div>
+        <div class="process-body">
+          <h3><span data-en>Understand the business</span><span data-am>ንግዱን መረዳት</span></h3>
+          <p><span data-en>We visit or call, walk through how you currently operate, and figure out where technology actually helps — not just what sounds impressive.</span><span data-am>እንጎበኝዎታለን ወይም እንደውልልዎታለን፣ አሁን እንዴት እየሰሩ እንዳሉ እንመለከታለን፣ ቴክኖሎጂ በትክክል የት እንደሚረዳ እናውቃለን — የሚያምር ብቻ ሳይሆን።</span></p>
+        </div>
+      </div>
+      <div class="process-item reveal">
+        <div class="process-num">02</div>
+        <div class="process-body">
+          <h3><span data-en>Propose a scope and price</span><span data-am>ወሰን እና ዋጋ ማቅረብ</span></h3>
+          <p><span data-en>A clear proposal with what's included, timeline, and cost — no vague estimates that change later.</span><span data-am>የሚያካትተውን፣ የጊዜ ሰሌዳውን እና ወጪውን የሚገልጽ ግልጽ ሃሳብ — በኋላ የሚቀየር ግምት የለም።</span></p>
+        </div>
+      </div>
+      <div class="process-item reveal">
+        <div class="process-num">03</div>
+        <div class="process-body">
+          <h3><span data-en>Build in the open</span><span data-am>በግልጽነት መገንባት</span></h3>
+          <p><span data-en>Regular check-ins and working previews as we go, so you're never waiting weeks to see progress.</span><span data-am>እየገሰገስን ስንሄድ መደበኛ ግምገማዎች እና የስራ ናሙናዎች፣ ለሳምንታት እድገትን ለማየት አይጠብቁም።</span></p>
+        </div>
+      </div>
+      <div class="process-item reveal">
+        <div class="process-num">04</div>
+        <div class="process-body">
+          <h3><span data-en>Launch and support</span><span data-am>ማስጀመር እና ድጋፍ</span></h3>
+          <p><span data-en>We train your staff, launch the system, and stay on for support after — this is a relationship, not a handoff.</span><span data-am>ሰራተኞችዎን እናሰለጥናለን፣ ስርዓቱን እናስጀምራለን፣ ከዚያ በኋላም ድጋፍ እንቀጥላለን — ይህ ግንኙነት እንጂ ርክክብ ብቻ አይደለም።</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span data-en>Our work</span><span data-am>ስራዎቻችን</span></div>
+      <h2><span data-en>Projects we've shipped</span><span data-am>ያጠናቀቅናቸው ፕሮጀክቶች</span></h2>
+      <p><span data-en>A growing list — check back as we add more.</span><span data-am>እያደገ ያለ ዝርዝር — ተጨማሪ ስንጨምር ይመልከቱ።</span></p>
+    </div>
+
+    <div class="work-grid" id="workGrid">
+      <!--
+        ADD YOUR PROJECT LINKS HERE.
+        Copy this block for each project and edit the text + href:
+
+        <div class="work-card reveal">
+          <div class="work-tags">
+            <span class="tag">Website</span>
+            <span class="tag">E-commerce</span>
+          </div>
+          <h3>Project Name</h3>
+          <p>One or two sentence description of what you built and for whom.</p>
+          <a href="https://your-project-link.com" target="_blank" rel="noopener" class="work-link">
+            Visit Project <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
+      -->
+
+      <div class="work-empty reveal" id="workEmpty">
+        <i class="fa-solid fa-diagram-project"></i>
+        <p><span data-en>Our first case studies are coming soon. Paste project links in the code above to list them here.</span><span data-am>የመጀመሪያ የስራ ናሙናዎቻችን በቅርቡ ይመጣሉ።</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-wrap reveal">
+      <div class="contact-info">
+        <h3><span data-en>Let's talk about your business</span><span data-am>ስለ ንግድዎ እንነጋገር</span></h3>
+        <p><span data-en>Tell us where you are today. We'll tell you honestly whether — and how — we can help.</span><span data-am>ዛሬ የት እንዳሉ ይንገሩን። በእውነት ልንረዳዎት እንደምንችል እና እንዴት እንደሆነ እንነግርዎታለን።</span></p>
+
+        <div class="info-item">
+          <div class="info-icon"><i class="fa-solid fa-earth-africa"></i></div>
+          <div class="info-text">
+            <h4><span data-en>Coverage</span><span data-am>ሽፋን</span></h4>
+            <span><span data-en>Serving businesses across Ethiopia</span><span data-am>በመላው ኢትዮጵያ ንግዶችን እናገለግላለን</span></span>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+          <div class="info-text">
+            <h4><span data-en>Email</span><span data-am>ኢሜይል</span></h4>
+            <span>hello@gohtech.et</span>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+          <div class="info-text">
+            <h4><span data-en>Phone</span><span data-am>ስልክ</span></h4>
+            <span>+251 900 000 000</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-container">
+        <div class="success-msg" id="successMsg">
+          <i class="fa-solid fa-circle-check"></i>
+          <span data-en>Thanks — we'll be in touch soon.</span><span data-am>እናመሰግናለን — በቅርቡ እንገናኛለን።</span>
+        </div>
+        <form class="contact-form" id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name"><span data-en>Name</span><span data-am>ስም</span></label>
+              <input type="text" id="name" required placeholder="Abebe Kebede">
+            </div>
+            <div class="form-group">
+              <label for="business"><span data-en>Business Name</span><span data-am>የንግድ ስም</span></label>
+              <input type="text" id="business" placeholder="Your business">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email"><span data-en>Email</span><span data-am>ኢሜይል</span></label>
+              <input type="email" id="email" required placeholder="you@example.com">
+            </div>
+            <div class="form-group">
+              <label for="phone"><span data-en>Phone</span><span data-am>ስልክ</span></label>
+              <input type="tel" id="phone" placeholder="+251 900 000000">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message"><span data-en>What do you need help with?</span><span data-am>ምን ድጋፍ ይፈልጋሉ?</span></label>
+            <textarea id="message" required placeholder="Tell us about your business and what you're hoping to build..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-gold" style="align-self:flex-start;">
+            <span data-en>Send Message</span><span data-am>መልእክት ላክ</span> <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#home" class="logo"><span class="logo-mark">ጎ</span> Goh Tech</a>
+        <p><span data-en>Digital transformation for local businesses — websites, apps, POS, and the systems that hold them together.</span><span data-am>ለአካባቢ ንግዶች ዲጂታል ሽግግር — ድህረ ገጾች፣ መተግበሪያዎች፣ POS እና እነሱን አንድ ላይ የሚያስተሳስሩ ስርዓቶች።</span></p>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" class="social-link" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+          <a href="#" class="social-link" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4><span data-en>Company</span><span data-am>ኩባንያ</span></h4>
+        <ul>
+          <li><a href="#services"><span data-en>Services</span><span data-am>አገልግሎቶች</span></a></li>
+          <li><a href="#approach"><span data-en>Why Us</span><span data-am>ለምን እኛ</span></a></li>
+          <li><a href="#process"><span data-en>Process</span><span data-am>ሂደት</span></a></li>
+          <li><a href="#work"><span data-en>Work</span><span data-am>ስራዎች</span></a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4><span data-en>Services</span><span data-am>አገልግሎቶች</span></h4>
+        <ul>
+          <li><a href="#services"><span data-en>Websites &amp; E-commerce</span><span data-am>ድህረ ገጽ እና ኢ-ኮሜርስ</span></a></li>
+          <li><a href="#services"><span data-en>Mobile Apps</span><span data-am>የሞባይል መተግበሪያዎች</span></a></li>
+          <li><a href="#services"><span data-en>POS &amp; Inventory</span><span data-am>POS እና ክምችት</span></a></li>
+          <li><a href="#services"><span data-en>Business Automation</span><span data-am>የንግድ አውቶሜሽን</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Goh Tech (ጎህ ቴክ). <span data-en>All rights reserved.</span><span data-am>ሁሉም መብቶች የተጠበቁ ናቸው።</span></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  // Language toggle
+  const langButtons = document.querySelectorAll('#langToggle button');
+  langButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.getAttribute('data-set-lang');
+      document.documentElement.setAttribute('data-lang', lang);
+      langButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      localStorage.setItem('goh-lang', lang);
+    });
+  });
+  const savedLang = localStorage.getItem('goh-lang');
+  if (savedLang) {
+    document.documentElement.setAttribute('data-lang', savedLang);
+    langButtons.forEach(b => b.classList.toggle('active', b.getAttribute('data-set-lang') === savedLang));
+  }
+
+  // Mobile menu
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+  function toggleMenu(){
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('active');
+  }
+  hamburger.addEventListener('click', toggleMenu);
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => { if (navLinks.classList.contains('active')) toggleMenu(); });
+  });
+
+  // Navbar scroll state
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Contact form (front-end only simulation)
+  const contactForm = document.getElementById('contactForm');
+  const successMsg = document.getElementById('successMsg');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      contactForm.style.display = 'none';
+      successMsg.style.display = 'block';
+      setTimeout(() => {
+        contactForm.reset();
+        contactForm.style.display = 'flex';
+        successMsg.style.display = 'none';
+      }, 5000);
+    });
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  function revealOnScroll(){
+    const vh = window.innerHeight;
+    reveals.forEach(el => {
+      if (el.getBoundingClientRect().top < vh - 90) el.classList.add('active');
+    });
+  }
+  window.addEventListener('scroll', revealOnScroll);
+  revealOnScroll();
+
+  // Hide the "coming soon" placeholder automatically if real project cards exist
+  const workGrid = document.getElementById('workGrid');
+  const workEmpty = document.getElementById('workEmpty');
+  const realCards = workGrid.querySelectorAll('.work-card');
+  if (realCards.length > 0 && workEmpty) workEmpty.style.display = 'none';
+});
+</script>
+</body>
+</html>
